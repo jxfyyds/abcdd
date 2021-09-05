@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>
+        标题：
+        <input type="text" id="title">
+    </p>
+    <p>
+        邮箱：
+        <input type="text" id="email">
+    </p>
+    <p>
+        上传文件：
+        <input type="file" id="picture">
+    </p>
+    <button id="btn">提交</button>
+</body>
+<script>
+    let btnEle = document.getElementById('btn')
+    btnEle.onclick = function () {
+        let formData = new FormData;
+        let title = document.getElementById('title').value;
+        let email = document.getElementById('email').value;
+        let picture = document.getElementById('picture')
+        let file = picture.files[0];
+          
+
+          formData.append('title',title)
+          formData.email('title',email)
+          formData.append('avater',picture)
+
+
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                console.log(this.responseText)
+            }
+        }
+        xhr.open('post', '/upload', true)
+        xhr.send(formData)
+
+    }
+</script>
+
+</html>
